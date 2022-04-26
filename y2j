@@ -1,17 +1,4 @@
-#!/usr/bin/env python2
-# Copyright 2017 Billy Holmes
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-# 
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-# 
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#!/usr/bin/env python
 
 import json, yaml, sys, argparse, os
 
@@ -65,22 +52,22 @@ types=[ 'y2j', 'j2y' ]
 arg_type = filter(lambda x: x in types, [myself])
 
 if not arg_type:
-  print "Unknown command! [%s] isn't either of %s!\n" % (myself, types)
+  print("Unknown command! [%s] isn't either of %s!\n" % (myself, types))
   exit(1)
 
 def convert_yaml_to_json(inp):
   y = yaml.load(inp)
-  print json.dumps(y)
+  print(json.dumps(y))
   return 0
 
 def convert_json_to_yaml(inp):
   # j = json.loads(inp)
   j = yaml.load(inp)
-  print '---'
-  print yaml.safe_dump(j, default_flow_style=False)
+  print('---')
+  print(yaml.safe_dump(j, default_flow_style=False))
   return 0
 
-arg_type=arg_type[0]
+arg_type=list(arg_type)[0]
 arg_map=dict(
   y2j = [ 'Converts yaml to json', convert_yaml_to_json ],
   j2y = [ 'Converts json to yaml', convert_json_to_yaml ]
@@ -91,7 +78,7 @@ parser.add_argument('input', nargs='?', help='input file')
 args = parser.parse_args()
 
 if args.input:
-  fs = open('r', args.input)
+  fs = open(args.input, 'r')
 else:
   fs = sys.stdin
 
