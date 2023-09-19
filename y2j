@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import json, yaml, sys, argparse, os
 
@@ -56,13 +56,13 @@ if not arg_type:
   exit(1)
 
 def convert_yaml_to_json(inp):
-  y = yaml.load(inp)
+  y = yaml.load(inp, Loader=yaml.SafeLoader)
   print(json.dumps(y))
   return 0
 
 def convert_json_to_yaml(inp):
   # j = json.loads(inp)
-  j = yaml.load(inp)
+  j = yaml.load(inp, Loader=yaml.SafeLoader)
   print('---')
   print(yaml.safe_dump(j, default_flow_style=False))
   return 0
